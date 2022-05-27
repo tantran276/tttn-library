@@ -10,4 +10,6 @@ public interface UserService {
 	public void saveUser(User user);
 	public User getUserById(long id);
 	public void deleteById(long id);
+	public boolean existByUsername(String username);
+	public List<User> searchByFirstName(String firstName);
 }

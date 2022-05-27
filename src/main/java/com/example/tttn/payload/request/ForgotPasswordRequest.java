@@ -7,7 +7,8 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor
 @ToString
-public class ReservationRequest {
-	private long userId;
-	private String isbn;
+public class ForgotPasswordRequest {
+
+	private String username;
+	private String siteUrl;
 }

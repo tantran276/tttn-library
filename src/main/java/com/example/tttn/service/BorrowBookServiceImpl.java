@@ -30,4 +30,9 @@ public class BorrowBookServiceImpl implements BorrowBookService{
 		return borrowBookRepository.getById(id);
 	}
 
+	@Override
+	public List<BorrowBook> findAllBorrowed() {
+		return borrowBookRepository.findAllBorrowed();
+	}
+
 }

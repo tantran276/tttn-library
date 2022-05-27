@@ -1,6 +1,5 @@
 package com.example.tttn.payload;
 
-import java.io.File;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -23,5 +22,5 @@ public class BookDto {
 	private String content;
 	private long price;
 	private String createDate;
-	private File image;
+	private String status;
 }

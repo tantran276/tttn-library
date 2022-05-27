@@ -71,5 +71,10 @@ public class User{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Reservation> reservations;
+    private List<Reservation> reservations;
+	
+	@Column(name = "verification_code", length = 64)
+    private String verificationCode;
+     
+    private boolean enabled;
 }

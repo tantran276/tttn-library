@@ -37,6 +37,7 @@ public class Reservation {
 	@Column(name = "reservation_date")
 	private Date reservationDate;
 	
+	@JsonIgnore
 	@Column(name = "status")
 	private long status;
 	

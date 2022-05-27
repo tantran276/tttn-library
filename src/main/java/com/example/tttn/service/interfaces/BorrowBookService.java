@@ -11,5 +11,7 @@ public interface BorrowBookService {
 	List<BorrowBook> getAll();
 
 	BorrowBook findById(long id);
+
+	List<BorrowBook> findAllBorrowed();
 	
 }

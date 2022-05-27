@@ -29,6 +29,12 @@ public class BookDtoMapper {
 		});
 		bookDto.setTags(tags);
 		bookDto.setTitle(book.getTitle());
+		if(book.isStatus()) {
+			bookDto.setStatus("Đang rỗi");
+		} else {
+			bookDto.setStatus("Đang mượn");
+		}
+		
 		return bookDto;
 	}
 }

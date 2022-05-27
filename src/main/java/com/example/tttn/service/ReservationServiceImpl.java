@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.tttn.entity.Reservation;
+import com.example.tttn.entity.User;
 import com.example.tttn.repository.ReservationRepository;
 import com.example.tttn.service.interfaces.ReservationService;
 
@@ -33,6 +34,11 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public void deleteReservation(long id) {
 		reservationRepository.deleteById(id);;
+	}
+
+	@Override
+	public long countReservationByUser(User user) {
+		return reservationRepository.countResevationByUser(user);
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.example.tttn.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,4 +15,8 @@ public interface TagRepository extends JpaRepository<Tag, Long>{
 	Tag findByName(String name);
 	
 	boolean existsByName(String name);
+	
+	@Query("SELECT t FROM Tag t WHERE " +
+			"t.name LIKE CONCAT('%', :query, '%')")
+	List<Tag> searchTag(String query);
 }
