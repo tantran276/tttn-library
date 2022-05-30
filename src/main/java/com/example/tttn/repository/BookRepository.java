@@ -42,6 +42,15 @@ public interface BookRepository extends JpaRepository<Book, Long>{
 	@Query("SELECT COUNT(b) FROM Book b WHERE b.isbn = ?1"+ 
 			" AND b.status = true")
 	long countReadyBook(String isbn);
+	
+	@Query("SELECT COUNT(b) FROM Book b WHERE b.status = false")
+	long countBorrowBook();
+	
+	@Query("SELECT COUNT(b) FROM Book b WHERE b.status = true")
+	long countReadyBook();
+	
+	@Query("SELECT COUNT(b) FROM Book b")
+	long countBook();
 
 	@Query("SELECT b FROM Book b WHERE b.isbn = ?1"+ 
 			" AND b.status = true")

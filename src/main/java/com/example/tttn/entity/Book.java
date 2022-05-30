@@ -51,8 +51,7 @@ public class Book {
 	private Set<Tag> tags;
 	
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "book_liked", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	@ManyToMany
 	private Set<User> users;
 	
 	@JsonIgnore
@@ -69,6 +68,7 @@ public class Book {
 	@JoinColumn(name="category_id", nullable=false)
 	private Category category;
 	
+	@JsonIgnore
 	@Lob
 	@Column(name = "image", columnDefinition = "MEDIUMBLOB")
 	private byte[] image;

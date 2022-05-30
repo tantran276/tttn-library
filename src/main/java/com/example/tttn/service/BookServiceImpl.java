@@ -1,7 +1,9 @@
 package com.example.tttn.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -106,6 +108,15 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public byte[] getImage(String isbn) {
 		return bookRepository.getImageByIsbn(isbn).get(0);
+	}
+
+	@Override
+	public Map<String, Long> countBook() {
+		Map<String, Long> countBook = new HashMap<>();
+		countBook.put("Tổng số sách", bookRepository.countBook());
+		countBook.put("Sách đã mượn", bookRepository.countBorrowBook());
+		countBook.put("Sách đang rỗi", bookRepository.countReadyBook());
+		return countBook;
 	}
 
 }

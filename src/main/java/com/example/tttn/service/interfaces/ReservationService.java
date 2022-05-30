@@ -15,5 +15,6 @@ public interface ReservationService {
 	void deleteReservation(long id);
 
 	long countReservationByUser(User user);
+
 	
 }

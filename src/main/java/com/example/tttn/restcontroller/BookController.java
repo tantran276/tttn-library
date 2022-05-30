@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -45,7 +44,7 @@ import com.example.tttn.repository.CategoryRepository;
 import com.example.tttn.repository.PublisherRepository;
 import com.example.tttn.repository.TagRepository;
 import com.example.tttn.service.interfaces.AuthorService;
-import com.example.tttn.service.interfaces.BookService;import com.example.tttn.service.interfaces.BorrowBookService;
+import com.example.tttn.service.interfaces.BookService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -100,32 +99,36 @@ public class BookController {
 			@RequestParam(name = "cspl", required = false) String cspl,
 			@RequestParam(name = "year", required = false) Integer year,
 			@RequestParam(name = "quicksearch", required = false) String query,
-			@RequestParam(name = "page", required = false) Integer offset) {
+			@RequestParam(name = "offset", required = false) Integer offset,
+			@RequestParam(name = "pageSize", required = false) Integer pageSize) {
 		if (offset == null) {
 			offset = 0;
 		}
+		if (pageSize == null) {
+			pageSize = 10;
+		}
 		if (query != null) {
-			return ResponseEntity.ok(this.paging(this.convertListBook(bookService.searchBook(query)), offset, 10));
+			return ResponseEntity.ok(this.paging(this.convertListBook(bookService.searchBook(query)), offset, pageSize));
 		}
 		if (author != null) {
-			return ResponseEntity.ok(this.paging(this.convertListBook(this.searchByAuthor(author)), offset, 10));
+			return ResponseEntity.ok(this.paging(this.convertListBook(this.searchByAuthor(author)), offset, pageSize));
 		}
 		if (title != null) {
-			return ResponseEntity.ok(this.paging(this.convertListBook(bookService.searchByTitle(title)), offset, 10));
+			return ResponseEntity.ok(this.paging(this.convertListBook(bookService.searchByTitle(title)), offset, pageSize));
 		}
 		if (isbn != null) {
-			return ResponseEntity.ok(this.paging(this.convertListBook(bookService.findBookByIsbn(isbn)), offset, 10));
+			return ResponseEntity.ok(this.paging(this.convertListBook(bookService.findBookByIsbn(isbn)), offset, pageSize));
 		}
 		if (cspl != null) {
-			return ResponseEntity.ok(this.paging(this.convertListBook(this.searchByCategory(cspl)), offset, 10));
+			return ResponseEntity.ok(this.paging(this.convertListBook(this.searchByCategory(cspl)), offset, pageSize));
 		}
 		if (tag != null) {
-			return ResponseEntity.ok(this.paging(this.convertListBook(this.searchByTag(tag)), offset, 10));
+			return ResponseEntity.ok(this.paging(this.convertListBook(this.searchByTag(tag)), offset, pageSize));
 		}
 		if (year != null) {
-			return ResponseEntity.ok(this.paging(this.convertListBook(bookService.searchByYear(year)), offset, 10));
+			return ResponseEntity.ok(this.paging(this.convertListBook(bookService.searchByYear(year)), offset, pageSize));
 		}
-		return ResponseEntity.ok(new PageImpl<>(new ArrayList(), PageRequest.of(offset, 10), 0) );
+		return ResponseEntity.ok(new PageImpl<>(new ArrayList(), PageRequest.of(offset, pageSize), 0) );
 	}
 
 	@GetMapping("/book")
@@ -142,6 +145,11 @@ public class BookController {
 			bookResponses.add(this.toBookResponse(book));
 		});
 		return ResponseEntity.ok(this.paging(bookResponses, offset, pageSize));
+	}
+	
+	@GetMapping("/count")
+	public ResponseEntity<?> countBook() {
+		return ResponseEntity.ok(bookService.countBook());
 	}
 
 	@PostMapping

@@ -1,6 +1,8 @@
 package com.example.tttn.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +50,17 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> searchByFirstName(String firstName) {
 		return userRepository.searchUserByFirstName(firstName);
+	}
+
+	@Override
+	public Map<Integer, Integer> userInMonth(Long year, Long month) {
+		Map<Integer, Integer> userInMonthMap = new HashMap();
+		List<Integer> userInMonthDays = userRepository.searchDayNumberUserForMonth(year, month);
+		List<Integer> numberUserInMonths = userRepository.searchNumberUserForMonth(year, month);
+		for (int i = 0; i < userInMonthDays.size(); i++) {
+			userInMonthMap.put(userInMonthDays.get(i), numberUserInMonths.get(i));
+		}
+		return userInMonthMap;
 	}
 	
 }

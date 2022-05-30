@@ -66,8 +66,12 @@ public class User{
 	private Date createDate;
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy = "users")
-	private List<Book> books;
+	@ManyToMany
+	@JoinTable(
+			  name = "book_liked", 
+			  joinColumns = @JoinColumn(name = "user_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "book_id"))
+	private Set<Book> likedBooks;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

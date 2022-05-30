@@ -115,6 +115,11 @@ public class BorrorwBookController {
 		return ResponseEntity.ok(this.paging(borrowBookResponses, offset, pageSize));
 	}
 	
+	@GetMapping("/countformonth")
+	public ResponseEntity<?> getCountForMonth(@RequestParam(name = "year")Long year, @RequestParam(name = "month")Long month) {
+		return ResponseEntity.ok(borrowBookService.getCountForMonth(year, month));
+	}
+	
 	@PutMapping("/return/{id}")
 	public ResponseEntity<?> returnBorrowBook(@PathVariable long id) {
 		BorrowBook borrowBook = borrowBookService.findById(id);

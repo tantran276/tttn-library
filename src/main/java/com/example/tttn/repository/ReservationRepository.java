@@ -8,10 +8,9 @@ import com.example.tttn.entity.Reservation;
 import com.example.tttn.entity.User;
 
 @Repository
-public interface ReservationRepository extends JpaRepository<Reservation, Long>{
+public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-	@Query("Select r from Reservation r where r.user = ?1 " + 
-			"And r.status = 0")
+	@Query("Select r from Reservation r where r.user = ?1 " + "And r.status = 0")
 	long countResevationByUser(User user);
 
 }

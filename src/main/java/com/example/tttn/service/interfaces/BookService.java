@@ -1,6 +1,7 @@
 package com.example.tttn.service.interfaces;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 
@@ -24,4 +25,5 @@ public interface BookService {
 	long countBorrowedBook(String string);
 	long countReadyBook(String string);
 	List<Book> findReadyBookByIsbn(String isbn);
+	Map<String, Long> countBook();
 }
